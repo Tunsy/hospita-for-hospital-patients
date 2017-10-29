@@ -1,0 +1,195 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "GetMessagesIntent",
+      "samples": [
+        "Get messages for {Roommate}",
+        "Read messages for {Roommate}",
+        "What are {Roommate} messages",
+        "Get notes for {Roommate}",
+        "Read notes for {Roommate}",
+        "What are my notes",
+        "Read my notes"
+      ],
+      "slots": [
+        {
+          "name": "Roommate",
+          "type": "AMAZON.US_FIRST_NAME",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "PolitelyAsk",
+      "samples": [
+        "Politely ask {Roommate} to {Message}",
+        "Post a passive aggressive note"
+      ],
+      "slots": [
+        {
+          "name": "Roommate",
+          "type": "AMAZON.US_FIRST_NAME",
+          "samples": [
+            "{Roommate}"
+          ]
+        },
+        {
+          "name": "Message",
+          "type": "Task",
+          "samples": [
+            "{Message}"
+          ]
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Task",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "take out the trash",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "move your stuff",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "stop taking my parking spot",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "eating my pizza rolls",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "clean up your shit",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "stop having sex on the table",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "buy toilet paper",
+            "synonyms": []
+          }
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-GetMessagesIntent.IntentSlot-Roommate",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Whose notes should be read?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-PolitelyAsk.IntentSlot-Roommate",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Who is the note to?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-PolitelyAsk.IntentSlot-Message",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What will the note say?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "GetMessagesIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "Roommate",
+            "type": "AMAZON.US_FIRST_NAME",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-GetMessagesIntent.IntentSlot-Roommate"
+            }
+          }
+        ]
+      },
+      {
+        "name": "PolitelyAsk",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "Roommate",
+            "type": "AMAZON.US_FIRST_NAME",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-PolitelyAsk.IntentSlot-Roommate"
+            }
+          },
+          {
+            "name": "Message",
+            "type": "Task",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-PolitelyAsk.IntentSlot-Message"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
